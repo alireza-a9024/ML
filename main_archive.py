@@ -82,3 +82,43 @@ for train_index, test_index in splitter.split(housing, housing["income_cat"]):
     strat_test_set_n = housing.iloc[test_index]
     strat_splits.append([strat_train_set_n, strat_test_set_n])
 strat_train_set, strat_test_set = strat_splits[0]
+
+# single stratified split
+#strat_train_set, strat_test_set = train_test_split(
+#    housing, test_size=0.2, stratify=housing["income_cat"], random_state=42)
+
+#strat_test_set["income_cat"].value_counts() / len(strat_test_set)
+
+
+# extra code – computes the data for Figure 2–10
+
+#def income_cat_proportions(data):
+#    return data["income_cat"].value_counts() / len(data)
+#
+#train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
+#
+#compare_props = pd.DataFrame({
+#    "Overall %": income_cat_proportions(housing),
+#    "Stratified %": income_cat_proportions(strat_test_set),
+#    "Random %": income_cat_proportions(test_set),
+#}).sort_index()
+#compare_props.index.name = "Income Category"
+#compare_props["Strat. Error %"] = (compare_props["Stratified %"] /
+#                                   compare_props["Overall %"] - 1)
+#compare_props["Rand. Error %"] = (compare_props["Random %"] /
+#                                  compare_props["Overall %"] - 1)
+#(compare_props * 100).round(2)
+#for set_ in (strat_train_set, strat_test_set):
+#   set_.drop("income_cat", axis=1, inplace=True)
+
+
+# For visualizing the geographical data
+housing.plot(kind="scatter", x="longitude", y="latitude", grid=True)
+save_fig("bad_visualization_plot")  # extra code
+plt.show()
+
+
+#This version has a transparency of 20% so the density can be visualized
+housing.plot(kind="scatter", x="longitude", y="latitude", grid=True, alpha=0.2)
+save_fig("better_visualization_plot")  # extra code
+plt.show()
